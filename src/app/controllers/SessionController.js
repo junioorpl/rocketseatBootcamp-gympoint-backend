@@ -4,6 +4,7 @@ import authConfig from '../../config/auth';
 import User from '../models/User';
 
 class SessionController {
+  // Método que realiza o login do usuario
   async store(req, res) {
     // Validação de dados da requisição
     const request = Yup.object().shape({

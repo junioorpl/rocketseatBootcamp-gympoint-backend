@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import Student from '../models/Student';
 
 class StudentController {
+  // Método de criação de estudante
   async store(req, res) {
     // Validação de dados da requisição
     const request = Yup.object().shape({
@@ -9,9 +10,15 @@ class StudentController {
       email: Yup.string()
         .email()
         .required(),
-      age: Yup.number().required(),
-      weight: Yup.number().required(),
-      height: Yup.number().required(),
+      age: Yup.number()
+        .positive()
+        .required(),
+      weight: Yup.number()
+        .positive()
+        .required(),
+      height: Yup.number()
+        .positive()
+        .required(),
     });
 
     if (!(await request.isValid(req.body))) {
@@ -36,14 +43,19 @@ class StudentController {
     });
   }
 
+  // Método de atualização de estudante
   async update(req, res) {
     // Validação de dados da requisição
     const request = Yup.object().shape({
       name: Yup.string().required(),
       email: Yup.string().email(),
-      age: Yup.number(),
-      height: Yup.number(),
-      weight: Yup.number(),
+      age: Yup.number()
+        .positive()
+        .integer(),
+      height: Yup.number()
+        .positive()
+        .integer(),
+      weight: Yup.number().positive(),
     });
 
     if (!(await request.isValid(req.body))) {
@@ -68,6 +80,7 @@ class StudentController {
 
     // Atualiza estudante no banco de dados
     const { name, email, age, height, weight } = await student.update(req.body);
+
     return res.json({
       name,
       email,
