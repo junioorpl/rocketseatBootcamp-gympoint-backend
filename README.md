@@ -10,5 +10,7 @@ O app conta com funcionalidades de gerenciamento de estudantes por parte dos usu
 Principais tecnologias presentes: 
 
 Node.js - juntamente com Express e JWT para autenticação de usuário.
+
 PostgreSQL - juntamente com Sequelizer para integração do banco com a aplicação
+
 Redis - banco para armazenamento de registros de fila
